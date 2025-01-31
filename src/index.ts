@@ -11,7 +11,7 @@ app.post("/parse", (req, res) => {
     }
 
     try {
-        const ast = Parse(query);
+        const ast = Parser(query);
         return res.json({ ast });
     } catch (error) {
         return res.status(500).json({ error: "Failed to parse query", details: error.toString() });
