@@ -4,6 +4,7 @@
     "moduleResolution": "NodeNext",
     "outDir": "dist",
     "esModuleInterop": true,
+    "resolveJsonModule": true,
     "target": "ES2022"
   }
 }
