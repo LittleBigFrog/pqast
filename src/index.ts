@@ -1,5 +1,5 @@
 import express from "express";
-import { Parse } from "@microsoft/powerquery-parser";
+import { Parser } from "@microsoft/powerquery-parser";
 
 const app = express();
 app.use(express.json());
