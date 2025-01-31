@@ -1,12 +1,15 @@
 {
   "name": "powerquery-ast-api",
   "version": "1.0.0",
-  "description": "Cloudflare Workers API to parse Power Query scripts into AST",
-  "main": "src/index.ts",
+  "description": "Power Query AST API",
+  "type": "module",
+  "main": "dist/index.js",
   "dependencies": {
-    "@microsoft/powerquery-parser": "^0.15.10"
+    "@microsoft/powerquery-parser": "^0.15.10",
+    "express": "^4.18.2"
   },
   "scripts": {
-    "start": "node src/index.ts"
+    "build": "tsc",
+    "start": "node dist/index.js"
   }
 }
