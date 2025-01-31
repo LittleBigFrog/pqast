@@ -1,26 +1,25 @@
+import express from "express";
 import { Parse } from "@microsoft/powerquery-parser";
 
-export default {
-    async fetch(request: Request): Promise<Response> {
-        if (request.method !== "POST") {
-            return new Response(JSON.stringify({ error: "Use POST method" }), { status: 405 });
-        }
+const app = express();
+app.use(express.json());
 
-        try {
-            const { query } = await request.json();
-            if (!query) {
-                return new Response(JSON.stringify({ error: "Missing Power Query code" }), { status: 400 });
-            }
+app.post("/parse", (req, res) => {
+    const { query } = req.body;
+    if (!query) {
+        return res.status(400).json({ error: "Missing Power Query code" });
+    }
 
-            const ast = Parse(query);
-            return new Response(JSON.stringify(ast, null, 2), {
-                headers: { "Content-Type": "application/json" },
-            });
-        } catch (error) {
-            return new Response(JSON.stringify({ error: "Failed to parse query", details: error.toString() }), {
-                status: 500,
-                headers: { "Content-Type": "application/json" },
-            });
-        }
-    },
-};
+    try {
+        const ast = Parse(query);
+        return res.json({ ast });
+    } catch (error) {
+        return res.status(500).json({ error: "Failed to parse query", details: error.toString() });
+    }
+});
+
+// Start the server on port 3000
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
