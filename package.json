@@ -2,7 +2,7 @@
   "name": "powerquery-ast-api",
   "version": "1.0.0",
   "description": "Cloudflare Workers API to parse Power Query scripts into AST",
-  "main": "index.ts",
+  "main": "src/index.ts",
   "dependencies": {
     "@microsoft/powerquery-parser": "^0.15.10"
   },
